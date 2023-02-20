@@ -1,0 +1,18 @@
+# XRAI tool UI library
+raiwidgets==0.22.0
+responsibleai==0.22.0
+raiutils==0.2.0
+erroranalysis==0.3.12
+econml==0.13.1
+lightgbm==3.3.3
+numba
+sparse==0.12.0
+pandas
+sklearn
+joblib
+IPython
+numpy
+ipywidgets
+plotly
+seaborn
+scipy
