@@ -1,4 +1,8 @@
+'''
+Required functions for User interface (UI)
+Inputs: data sets and model
 
+'''
 
 # Import required libraries xrai features
 from responsibleai import RAIInsights
