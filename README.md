@@ -1,57 +1,35 @@
+# Explainable and Responsible AI Toolkit (v2.0 - 2023-05)
+***Developed by AI COE and DS Consulting***
+
+The **DSAI Explainable and Responsible AI (XRAI) Toolkit** is a complementary tool to the [XRAI Guidelines document](https://unionbankphilippines.sharepoint.com/:b:/s/DataScienceInsightsTeam/EbGWZEJkn7REt1zzHspu-xABsLDpD1eD6mgHMjPJypnzdA?e=wm55U7). The Toolkit provides a one-stop tool for technical tests were identified by packaging widely used open-source libraries into a single platform, according to ADI/DSAI user needs. These tools include Python libraries such as `dice-ml`, `dalex`, `erroranalysis`, `scikit-learn`, and UI visualization libraries such as `ExplainerDashboard`. This toolkit aims to: 
+- Provide a user interface to guide users step-by-step in the testing process; 
+- Support certain binary classification and regression models that use tabular data 
+- Produce a basic summary report to help DSAI System Developers and Owners interpret test results 
+- Intended to be deployable in the user’s environment
+
+This Toolkit, along with the Guidelines document, is the first major version release. Subsequent versions and updates will be found in the XRAI [GitHub repo](https://github.com/aboitiz-data-innovation/XRAI), accompanied by quarterly XRAI Brownbag sessions.
+
+# Introduction
+## Assumptions / Limitations
+The toolkit is in its second iteration
+ of development. As such, there are limitations which hinders the Toolkit from being able to handle certain models and display other XRAI-related features. These include:
+- V2 can only handle binary classification models and regression models 
+- Only Python users for V2. An R-based Toolkit may be released according to demand and necessity for later versions 
+- Certain features may be discussed in Guidelines V2 but are not yet in Toolkit V2 
+- This notebook does not define ethical standards. It provides a way for DSAI System Developers and Owners to demonstrate their claims about the performance of their DSAI systems according to the XRAI principles
+- Protected groups are those groups you want to compare model performance on them to all data they can be defined as this format `{"feature name 1":  value, "feature name 2":  value,...}`  you can define as many protected groups as you want, and they can be numerical or even categorical, such as `{age: 23, sex: "female"}`.
 
 
-# Requirements
-```
-python = 3.7
-```
-Ensure that you have the correct libraries and dependencies installed by checking `requirements.txt`.
+## Inputs
+Our interactive toolkit only needs two main inputs before any major analysis:
+- Model (.pkl or .sav)
+- Data (train, test) (.csv) 
 
+We intend for the user to have inputs mostly on the XRAI-related functions. However, we need the user to manually input **the names of train and test file**, in addition to target variable name. Prompts will be shown later in the notebook where you will need to load. In the shared folder we have provided sample model and data (test_data.csv, train_data.csv, finalized_model.pkl). For testing for different models and data you may just replace files.
 
-# Play with XRAI tool using Given Data
-Assuming the base directories are set correctly, run this in your terminal.
-
-`python download_pima_data_model.py`
-
-Once downloaded, you may run this code block in your Jupyter Notebook.
-
-```py
-import build_data_model from download_pima_data_model
-build_data_model()
-```
-
-
-# Play with XRAI tool using Custom Data
-Run this code block in your Jupyter Notebook. `load_data_model` allows you to load data and models so that our other XRAI functions can intake these files properly.
-
-```py
-from data_model import load_data_model
-
-# provide train_data, test_data, model_path and target_feature
-train_data = 'train_data.csv'
-test_data = 'test_data.csv'
-model_path = 'finalized_model.pkl'
-target_feature = 'class'
-
-X_train, Y_train, X_test, Y_test, train_data, test_data , model = load_data_model(train_data, test_data, model_path, target_feature)
-```
-Consider the following points:
-- In this version; we require `train_data` and `test_data` in csv format. 
-- `train_data` and `test_data` should be in same format. For example, if you have applied label encoding on your categorical variable you should have done the same processing on your same variable in test data.
-- The current version works for both categorical and numerical variables, although in future versions we are planning to add more existing features for categorical variables.
-
-# XRAI Tool Features
-For Version 1 of the XRAI Toolkit, we have following features incorporated in XRAI Dashboard and Jupyter Notebook:
-1. Error Analysis: Identify model errors and discover cohorts of data for which the model underperforms.
-2. Model overview: Understands model predictions using various matrices such as accuracy, recall etc. 
-3. Data exploration: Find out error segments where model underperforms and then see data exploration/statistics for these segments and many more
-4. Feature importance: We have capability to understand global feature importance, individual variable feature importance(group wise for ex. age more than 40 contributes more towards model predictions) or can visualize row wise (customer wise) importance.
-5. Fairness analysis.
-
-All the above features can be analyze on entire train or test data. Similarly, you may also define custom segments/groups/cohorts to undergo the same analysis. This may be helpful for analyzing underrepresented or protected groups. 
-
-
-# Future releases
-This is an initial release intended to collect feedback from DSAI/ADI users. We plan to release a 2nd version of the Toolkit (and Guidelines) on March 2023. Stay tuned for the following features and capabilties:
-- We aim to give functions that enable better understanding of categorical features, such as __. 
-- Regression analysis and Multi-label classification will be compatible for Version 2.
-- Additional exciting features like data drift, segment analytics, outlier analysis, stability analysis, and many more! 
+## Features found in the notebook
+- Fairness 
+- Model Performance Overview
+- Local Explainability
+- Global Explainability
+- Stability

@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+np.float = float
 
 from river import drift
 from skmultiflow.drift_detection import PageHinkley
@@ -85,6 +86,23 @@ def psi_list(train, test):
         print("There is/are indications that a slight shift has occurred between both datasets for column {}".format(slight))
             
     return large, slight
+
+def generate_psi_df(train, test):
+    top_feature_list=train.columns
+    df = pd.DataFrame(index=top_feature_list,columns=["Feature","PSI Value", "Shift"])
+    for feature in top_feature_list:
+        # Assuming you have a validation and training set
+        df["Feature"][feature] = feature
+        psi_t = calculate_psi(train[feature], test[feature])
+        df["PSI Value"][feature] = psi_t
+        if(psi_t <= 0.1):
+            df["Shift"][feature] = "No Shift"
+        elif(psi_t > 0.2):
+            df["Shift"][feature] = "Large Shift"
+        else:
+            df["Shift"][feature] = "Slight Shift"
+    return df
+        
 
 def PageHinkley(train, test):
     """
